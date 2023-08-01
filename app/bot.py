@@ -18,11 +18,10 @@ To streamline the support process and expedite solutions, please complete the fo
 
 ## Support Checklist:
 - **Search for Solutions**: Check our documentation and FAQs for existing answers https://docs.tubearchivist.com/.
-- **Update Software**: Ensure your software is up to date.
 - **Reproduce the Issue**: Try replicating the problem and note the steps.
 - **Review Settings**: Double-check your configurations.
-- **Check Network Connection**: Verify a stable internet connection.
 - **Provide Relevant Logs**: Include related logs with your query. Use a site like https://pastebin.com/ to quickly share large log files.
+- **Provide Installation details**: For questions about installing, share your compose file or other relevant info.
 - **Describe the Issue**: Clearly explain the problem and prior steps.
 
 ## Let's work together to get everything running smoothly! 🚀
