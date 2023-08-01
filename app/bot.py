@@ -1,6 +1,7 @@
 """discord bot for tubearchivist server"""
 
 import os
+import time
 
 import discord
 
@@ -11,8 +12,20 @@ intents.messages = True
 
 client = discord.Client(intents=intents)
 
-WELCOME_MESSAGE = """Welcome to the forum!
-Thanks for starting a new thread.
+WELCOME_MESSAGE = """
+## Welcome to the Support Channel!
+To streamline the support process and expedite solutions, please complete the following checklist before reaching out for assistance:
+
+## Support Checklist:
+- **Search for Solutions**: Check our documentation and FAQs for existing answers https://docs.tubearchivist.com/.
+- **Update Software**: Ensure your software is up to date.
+- **Reproduce the Issue**: Try replicating the problem and note the steps.
+- **Review Settings**: Double-check your configurations.
+- **Check Network Connection**: Verify a stable internet connection.
+- **Provide Relevant Logs**: Include related logs with your query. Use a site like https://pastebin.com/ to quickly share large log files.
+- **Describe the Issue**: Clearly explain the problem and prior steps.
+
+## Let's work together to get everything running smoothly! 🚀
 """
 
 @client.event
@@ -21,6 +34,8 @@ async def on_ready():
 
 @client.event
 async def on_thread_create(thread):
+
+    time.sleep(3)
 
     await thread.send(WELCOME_MESSAGE)
 
