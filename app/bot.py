@@ -17,10 +17,10 @@ WELCOME_MESSAGE = """
 To streamline the support process and expedite solutions, please complete the following checklist before reaching out for assistance:
 
 ## Support Checklist:
-- **Search for Solutions**: Check our documentation and FAQs for existing answers https://docs.tubearchivist.com/.
+- **Search for Solutions**: Check our documentation and FAQs for existing answers <https://docs.tubearchivist.com/>.
 - **Reproduce the Issue**: Try replicating the problem and note the steps.
 - **Review Settings**: Double-check your configurations.
-- **Provide Relevant Logs**: Include related logs with your query. Use a site like https://pastebin.com/ to quickly share large log files.
+- **Provide Relevant Logs**: Include related logs with your query. Use a site like <https://pastebin.com/> to quickly share large log files.
 - **Provide Installation details**: For questions about installing, share your compose file or other relevant info.
 - **Describe the Issue**: Clearly explain the problem and prior steps.
 
