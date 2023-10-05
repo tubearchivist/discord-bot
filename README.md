@@ -15,3 +15,6 @@ services:
     env_file:
       - ./env/discord-bot.env
 ```
+
+## Update
+Container rebuilds with webhook on commit to master.
