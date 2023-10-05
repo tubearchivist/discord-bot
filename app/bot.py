@@ -4,13 +4,15 @@ import os
 import time
 
 import discord
+from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
 intents.messages = True
+intents.members = True
 
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 WELCOME_MESSAGE = """
 ## Welcome to the Support Channel!
@@ -27,18 +29,26 @@ To streamline the support process and expedite solutions, please complete the fo
 ## Let's work together to get everything running smoothly! 🚀
 """
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f"We have logged in as {client.user}")
+    print(f"We have logged in as {bot.user}")
 
-@client.event
+@bot.event
 async def on_thread_create(thread):
 
     time.sleep(3)
 
     await thread.send(WELCOME_MESSAGE)
 
+@bot.event
+async def on_thread_update(before, after):
+    if any(tag.name == "solved" for tag in after.applied_tags):
+        if not after.name.startswith("[SOLVED]"):
+            await after.edit(name="[SOLVED] " + after.name)
+
+        await after.edit(archived=True)
+
 
 if __name__ == "__main__":
     bot_token = os.environ.get("BOT_TOKEN")
-    client.run(bot_token)
+    bot.run(bot_token)
