@@ -48,6 +48,14 @@ async def on_thread_update(before, after):
 
         await after.edit(archived=True)
 
+@bot.event
+async def on_message(message):
+    if isinstance(message.channel, discord.Thread) and message.channel.name.startswith("[SOLVED]"):
+        solved_tag = discord.utils.get(message.guild.tags, name="solved")
+        await message.channel.remove_thread_tags(solved_tag)
+        new_name = message.channel.name.replace("[SOLVED] ", "", 1)
+        await message.channel.edit(name=new_name)
+    await bot.process_commands(message)
 
 if __name__ == "__main__":
     bot_token = os.environ.get("BOT_TOKEN")
