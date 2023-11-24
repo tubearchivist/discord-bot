@@ -29,33 +29,26 @@ To streamline the support process and expedite solutions, please complete the fo
 ## Let's work together to get everything running smoothly! 🚀
 """
 
+CHANNEL_ID = 1006394050217246772  # The ID of the channel to monitor
+
 @bot.event
 async def on_ready():
     print(f"We have logged in as {bot.user}")
 
 @bot.event
 async def on_thread_create(thread):
-
-    time.sleep(3)
-
-    await thread.send(WELCOME_MESSAGE)
+    if thread.parent_id == CHANNEL_ID:
+        time.sleep(3)
+        await thread.send(WELCOME_MESSAGE)
 
 @bot.event
 async def on_thread_update(before, after):
-    if any(tag.name == "solved" for tag in after.applied_tags):
-        if not after.name.startswith("[SOLVED]"):
-            await after.edit(name="[SOLVED] " + after.name)
+    if before.parent_id == CHANNEL_ID:
+        if any(tag.name == "solved" for tag in after.applied_tags):
+            if not after.name.startswith("[SOLVED]"):
+                await after.edit(name="[SOLVED] " + after.name)
 
-        await after.edit(archived=True)
-
-@bot.event
-async def on_message(message):
-    if isinstance(message.channel, discord.Thread) and message.channel.name.startswith("[SOLVED]"):
-        solved_tag = discord.utils.get(message.guild.tags, name="solved")
-        await message.channel.remove_thread_tags(solved_tag)
-        new_name = message.channel.name.replace("[SOLVED] ", "", 1)
-        await message.channel.edit(name=new_name)
-    await bot.process_commands(message)
+            await after.edit(archived=True)
 
 if __name__ == "__main__":
     bot_token = os.environ.get("BOT_TOKEN")
