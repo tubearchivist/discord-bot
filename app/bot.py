@@ -44,10 +44,14 @@ async def on_thread_create(thread):
 @bot.event
 async def on_thread_update(before, after):
     if before.parent_id == CHANNEL_ID:
-        if any(tag.name == "solved" for tag in after.applied_tags):
-            if not after.name.startswith("[SOLVED]"):
-                await after.edit(name="[SOLVED] " + after.name)
+        applied_tag_names = [tag.name.lower() for tag in after.applied_tags]
 
+        if "solved" in applied_tag_names and not after.name.startswith("[SOLVED]"):
+            await after.edit(name="[SOLVED] " + after.name)
+            await after.edit(archived=True)
+
+        elif "inactive" in applied_tag_names and not after.name.startswith("[INACTIVE]"):
+            await after.edit(name="[INACTIVE] " + after.name)
             await after.edit(archived=True)
 
 if __name__ == "__main__":
